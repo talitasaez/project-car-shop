@@ -17,6 +17,6 @@ const CarSchema = new Schema<ICar>({
   },
 });
   
-const CarModel = model('Car', CarSchema);
+const CarModel = model<ICar>('Car', CarSchema);
   
 export default CarModel;
