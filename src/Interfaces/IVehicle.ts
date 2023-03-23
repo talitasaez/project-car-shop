@@ -6,5 +6,5 @@ interface IVehicle {
   status?: boolean | undefined;
   buyValue: number;
 }
-  
+
 export default IVehicle;
