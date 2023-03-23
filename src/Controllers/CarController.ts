@@ -20,7 +20,6 @@ export default class CarController {
       const newCar = await this.service
         .create({ model, year, color, status, buyValue, doorsQty, seatsQty });
       return res.status(201).json(newCar);
-      return res.status(201).json(newCar);
     } catch (err) {
       next(err);
     }
