@@ -46,4 +46,28 @@ export default class CarController {
       next(err);
     }
   };
+  updateOne = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+      const { model,
+        year,
+        color,
+        status = false,
+        buyValue,
+        doorsQty,
+        seatsQty } = req.body;
+
+      const updatedCar = await this.service.updateOne(id, { model,
+        year,
+        color,
+        status,
+        buyValue,
+        doorsQty,
+        seatsQty });
+
+      return res.status(200).json(updatedCar);
+    } catch (err) {
+      next(err);
+    }
+  };
 }

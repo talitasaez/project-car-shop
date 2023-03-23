@@ -21,4 +21,12 @@ export default class CarService {
     if (!car) { throw CustomError(404, 'Car not found'); }
     return car;
   }
+
+  async updateOne(id: string, carDto: Partial<ICar>) {
+    await this.findOne(id);
+
+    await CarModel.updateOne({ id }, { ...carDto });
+    const updatedCar = this.findOne(id);
+    return updatedCar;
+  }
 }
