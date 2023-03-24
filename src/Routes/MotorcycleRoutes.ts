@@ -1,9 +1,23 @@
 import { Router } from 'express';
-import MotorcyclesControllers from '../Controllers/MotorcycleController';
+import MotorcycleController from '../Controllers/MotorcycleController';
+import MotorcycleMiddlewares from '../Middlewares/MotorcycleMiddlewares';
 
-const MotorcyclesRouter = Router();
+const MotorcyclesRoute = Router();
+MotorcyclesRoute.get(
+  '/',
+  (req, res, next) => new MotorcycleController(req, res, next).getAllMotorcycles(),
+);
 
-MotorcyclesRouter
-  .post('/motorcycles', (req, res, next) => new MotorcyclesControllers(req, res, next).create());
+MotorcyclesRoute.get(
+  '/:id',
+  (req, res, next) => new MotorcycleMiddlewares().checkMotorcycleExists(req, res, next),
+  (req, res, next) => new MotorcycleController(req, res, next).getMotorcycleById(),
+);
 
-export default MotorcyclesRouter;
+MotorcyclesRoute.put(
+  '/:id',
+  (req, res, next) => new MotorcycleMiddlewares().checkMotorcycleExists(req, res, next),
+  (req, res, next) => new MotorcycleController(req, res, next).updateMotorcycleById(),
+);
+
+export default MotorcyclesRoute;
